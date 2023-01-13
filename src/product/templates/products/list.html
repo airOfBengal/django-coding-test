@@ -101,8 +101,26 @@
                 <p>Showing {{ page_obj.start_index }} to {{ page_obj.end_index }} out of {{ page_obj.paginator.count }}
                 </p>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-2 pagination">
+                {% if page_obj.has_previous %}
+                <a href="?page={{ page_obj.previous_page_number }}">&#60;</a>
+                {% else %}
+                <a disabled>&#60;</a>
+                {% endif %}
 
+                {% for i in page_obj.paginator.page_range %}
+                {% if page_obj.number == i %}
+                <a href="#" class="active">{{ i }} </a>
+                {% else %}
+                <a href="?page={{ i }}">{{ i }}</a>
+                {% endif %}
+                {% endfor %}
+
+                {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">&#62;</a>
+                {% else %}
+                <a disabled>&#62;</a>
+                {% endif %}
             </div>
         </div>
     </div>
