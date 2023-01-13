@@ -68,8 +68,12 @@
                                 </dt>
                                 <dd class="col-sm-9">
                                     <dl class="row mb-0">
-                                        <dd class="col-sm-4 pb-0">Price : {{ product.productvariantprice.price }}</dd>
-                                        <dd class="col-sm-8 pb-0">InStock : {{ product.productvariantprice.stock }}</dd>
+                                        {% with product.productvariantprice_set.all|first as variant_price %}
+                                        <dd class="col-sm-4 pb-0">Price : {{ variant_price.price }}
+                                        </dd>
+                                        <dd class="col-sm-8 pb-0">InStock : {{ variant_price.stock }}
+                                        </dd>
+                                        {% endwith %}
                                     </dl>
                                 </dd>
                                 {% endfor %}
