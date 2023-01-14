@@ -18,7 +18,25 @@
             <div class="col-md-2">
                 <select name="variant" id="" class="form-control">
                     <option selected disabled>--Select A Variant--</option>
+                    {% for variant in variant_list %}
+                    <optgroup label="{{ variant.title }}">
+                        {% for product_variant in variant.productvariant_set.all %}
+                        {% ifchanged product_variant.variant_title.strip %}
+                        <option value="{{product_variant.variant_title}}">{{ product_variant.variant_title }}</option>
+                        {% endifchanged %}
 
+                        {% endfor %}
+                    </optgroup>
+                    {% endfor %}
+
+                    <!-- {% regroup product_variant.variant_set.all by title as variant_list %}
+                    {% for variant in variant_list %}
+                    <optgroup label="{{ variant.grouper }}">
+                        {% for var in variant.list %}
+                        <option value="{{ var.description }}">{{ var.description }}</option>
+                        {% endfor %}
+                    </optgroup>
+                    {% endfor %} -->
                 </select>
             </div>
 
@@ -58,7 +76,7 @@
                     {% for product in object_list %}
                     <tr>
                         <td>{{ product.id }}</td>
-                        <td>{{ product.title }} <br> Created at : {{ product.created_at|timesince }} ago</td>
+                        <td>{{ product.title }} <br> Created at : {{ product.created_at }} ago</td>
                         <td>{{ product.description }}</td>
                         <td>
                             <dl class="row mb-0" style="height: 80px; overflow: hidden" id="variant">
