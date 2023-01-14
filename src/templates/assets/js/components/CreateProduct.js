@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import TagsInput from 'react-tagsinput';
 import 'react-tagsinput/react-tagsinput.css';
 import Dropzone from 'react-dropzone'
@@ -78,6 +78,7 @@ const CreateProduct = (props) => {
     let saveProduct = (event) => {
         event.preventDefault();
         // TODO : write your code here to save the product
+
     }
 
 
@@ -90,11 +91,11 @@ const CreateProduct = (props) => {
                             <div className="card-body">
                                 <div className="form-group">
                                     <label htmlFor="">Product Name</label>
-                                    <input type="text" placeholder="Product Name" className="form-control"/>
+                                    <input type="text" placeholder="Product Name" className="form-control" />
                                 </div>
                                 <div className="form-group">
                                     <label htmlFor="">Product SKU</label>
-                                    <input type="text" placeholder="Product Name" className="form-control"/>
+                                    <input type="text" placeholder="Product Name" className="form-control" />
                                 </div>
                                 <div className="form-group">
                                     <label htmlFor="">Description</label>
@@ -110,7 +111,7 @@ const CreateProduct = (props) => {
                             </div>
                             <div className="card-body border">
                                 <Dropzone onDrop={acceptedFiles => console.log(acceptedFiles)}>
-                                    {({getRootProps, getInputProps}) => (
+                                    {({ getRootProps, getInputProps }) => (
                                         <section>
                                             <div {...getRootProps()}>
                                                 <input {...getInputProps()} />
@@ -142,7 +143,7 @@ const CreateProduct = (props) => {
                                                             {
                                                                 JSON.parse(props.variants.replaceAll("'", '"')).map((variant, index) => {
                                                                     return (<option key={index}
-                                                                                    value={variant.id}>{variant.title}</option>)
+                                                                        value={variant.id}>{variant.title}</option>)
                                                                 })
                                                             }
 
@@ -155,15 +156,15 @@ const CreateProduct = (props) => {
                                                         {
                                                             productVariants.length > 1
                                                                 ? <label htmlFor="" className="float-right text-primary"
-                                                                         style={{marginTop: "-30px"}}
-                                                                         onClick={() => removeProductVariant(index)}>remove</label>
+                                                                    style={{ marginTop: "-30px" }}
+                                                                    onClick={() => removeProductVariant(index)}>remove</label>
                                                                 : ''
                                                         }
 
-                                                        <section style={{marginTop: "30px"}}>
+                                                        <section style={{ marginTop: "30px" }}>
                                                             <TagsInput value={element.tags}
-                                                                       style="margin-top:30px"
-                                                                       onChange={(value) => handleInputTagOnChange(value, index)}/>
+                                                                style="margin-top:30px"
+                                                                onChange={(value) => handleInputTagOnChange(value, index)} />
                                                         </section>
 
                                                     </div>
@@ -189,24 +190,24 @@ const CreateProduct = (props) => {
                                 <div className="table-responsive">
                                     <table className="table">
                                         <thead>
-                                        <tr>
-                                            <td>Variant</td>
-                                            <td>Price</td>
-                                            <td>Stock</td>
-                                        </tr>
+                                            <tr>
+                                                <td>Variant</td>
+                                                <td>Price</td>
+                                                <td>Stock</td>
+                                            </tr>
                                         </thead>
                                         <tbody>
-                                        {
-                                            productVariantPrices.map((productVariantPrice, index) => {
-                                                return (
-                                                    <tr key={index}>
-                                                        <td>{productVariantPrice.title}</td>
-                                                        <td><input className="form-control" type="text"/></td>
-                                                        <td><input className="form-control" type="text"/></td>
-                                                    </tr>
-                                                )
-                                            })
-                                        }
+                                            {
+                                                productVariantPrices.map((productVariantPrice, index) => {
+                                                    return (
+                                                        <tr key={index}>
+                                                            <td>{productVariantPrice.title}</td>
+                                                            <td><input className="form-control" type="text" /></td>
+                                                            <td><input className="form-control" type="text" /></td>
+                                                        </tr>
+                                                    )
+                                                })
+                                            }
                                         </tbody>
                                     </table>
                                 </div>

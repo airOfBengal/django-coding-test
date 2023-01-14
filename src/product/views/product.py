@@ -1,5 +1,5 @@
 from django.views import generic
-
+from django.db.models import Count
 from product.models import Variant, Product
 
 
@@ -21,7 +21,15 @@ class ListProductView(generic.ListView):
 
     def get_context_data(self, **kwargs):
         context = super(ListProductView, self).get_context_data(**kwargs)
-        context["variant_list"] = Variant.objects.all()
+        # distinct_list = (
+        #     Variant.objects.order_by()
+        #     .values("productvariant__variant_title")
+        #     .distinct()
+        # )
+        # print(distinct_list)
+        context["variant_list"] = Variant.objects.all().annotate(
+            var_count=Count("productvariant__variant_title")
+        )
         return context
 
 
