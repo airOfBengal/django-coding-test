@@ -18,3 +18,13 @@ class ListProductView(generic.ListView):
     template_name = "products/list.html"
     model = Product
     paginate_by = 2
+
+
+class SearchResultsListProductView(generic.ListView):
+    model = Product
+    template_name = "products/list.html"
+    paginate_by = 2
+
+    def get_queryset(self):
+        title = self.request.GET.get("title")
+        return Product.objects.filter(title__icontains=title)
